@@ -21,8 +21,8 @@ This script automates the installation and setup of a **clean Arch Linux** envir
 ### ⚡ Quick Start
 1. Clone this repository and run the post-install script:
    ```bash
-   git clone https://github.com/km-rjun/dotfiles
-   cd dotfiles
+   git clone https://github.com/km-rjun/archpost
+   cd archpost
    ./run.sh
 
 ## 📸 Screenshots
