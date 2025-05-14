@@ -25,3 +25,8 @@ This script automates the installation and setup of a **clean Arch Linux** envir
    cd dotfiles
    ./install.sh
 
+## 📸 Screenshots
+
+![Screenshot 1](screenshots/1.png)
+![Screenshot 2](screenshots/2.png)
+
