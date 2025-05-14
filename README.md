@@ -23,7 +23,7 @@ This script automates the installation and setup of a **clean Arch Linux** envir
    ```bash
    git clone https://github.com/km-rjun/dotfiles
    cd dotfiles
-   ./install.sh
+   ./run.sh
 
 ## 📸 Screenshots
 
