@@ -46,17 +46,17 @@ for folder in "$CLONE_DIR"/*; do
     ln -s "$folder" "$target"
 done
 
-echo "==> Configuring greetd to autostart Hyprland"
-sudo mkdir -p /etc/greetd
-sudo tee /etc/greetd/config.toml >/dev/null <<EOF
-[terminal]
-vt = 1
-
-[default_session]
-command = "Hyprland"
-user = "$USER"
-EOF
-
 sudo systemctl enable greetd
-
-echo "✅ Done! Reboot to launch Hyprland with greetd."
+# echo "==> Configuring greetd to autostart Hyprland"
+# sudo mkdir -p /etc/greetd
+# sudo tee /etc/greetd/config.toml >/dev/null <<EOF
+# [terminal]
+# vt = 1
+#
+# [default_session]
+# command = "Hyprland"
+# user = "$USER"
+# EOF
+#
+#
+# echo "✅ Done! Reboot to launch Hyprland with greetd."
