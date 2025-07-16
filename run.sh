@@ -20,12 +20,13 @@ fi
 
 echo "==> Installing packages..."
 yay -S --needed --noconfirm \
-    hyprland hyprpaper waybar kitty zsh neovim tmux lazygit fzf starship \
-    asusctl brave-bin wireguard-tools btop greetd pavucontrol grim slurp \
-    mako wofi wlogout ttf-jetbrains-mono-nerd \
+    hyprland hyprpaper waybar wofi wlogout mako greetd grim slurp \
     xdg-desktop-portal-hyprland wl-clipboard xdg-utils \
+    kitty zsh neovim tmux lazygit fzf starship \
+    brave-bin wireguard-tools btop pavucontrol \
+    ttf-jetbrains-mono-nerd \
     pipewire wireplumber pipewire-pulse ripgrep unzip zip tar \
-    blueman
+    asusctl
 
 echo "==> Cloning dotfiles..."
 git clone https://github.com/km-rjun/dotfiles "$CLONE_DIR"
