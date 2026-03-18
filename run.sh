@@ -117,4 +117,20 @@ for folder in "$CLONE_DIR"/*; do
     ln -s "$folder" "$target"
 done
 
+echo "==> Configuring greetd..."
+
+if [[ "$DE" == "hyprland" ]]; then
+    SESSION_CMD="Hyprland"
+else
+    SESSION_CMD="niri"
+fi
+
+sudo mkdir -p /etc/greetd
+
+sudo tee /etc/greetd/config.toml > /dev/null <<EOF
+[default_session]
+command = "$SESSION_CMD"
+user = "$(whoami)"
+EOF
+
 echo "==> Setup complete!"
