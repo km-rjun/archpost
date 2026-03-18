@@ -4,29 +4,29 @@ set -e
 CONFIG_DIR="$HOME/.config"
 CLONE_DIR="$HOME/.dotfiles_temp"
 
-read -rp "Do you want to create a new user? (y/N): " CREATE_USER
+if [[ $EUID -eq 0 ]]; then
+    echo "==> Running as root"
 
-if [[ "$CREATE_USER" =~ ^[Yy]$ ]]; then
-    read -rp "Enter username: " NEW_USER
+    read -rp "Enter username to create/use: " NEW_USER
+
     if id "$NEW_USER" &>/dev/null; then
-        echo "User already exists. Skipping creation."
+        echo "==> User exists: $NEW_USER"
     else
         echo "==> Creating user: $NEW_USER"
-        sudo useradd -m -G wheel -s /bin/bash "$NEW_USER"
-        echo "Set password for $NEW_USER:"
-        sudo passwd "$NEW_USER"
+        useradd -m -G wheel -s /bin/bash "$NEW_USER"
+        passwd "$NEW_USER"
+
         echo "==> Enabling sudo for wheel group..."
         sed -i 's/^# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
     fi
-fi
 
-echo "==> Switching to $NEW_USER and continuing..."
-SCRIPT_PATH="$(realpath "$0")"
-sudo -u "$NEW_USER" bash -c "
-cd ~
-$SCRIPT_PATH
-"
-exit 0
+    echo "==> Switching to $NEW_USER and continuing..."
+    SCRIPT_PATH="$(realpath "$0")"
+    sudo -u "$NEW_USER" bash -c "
+    cd ~
+    $SCRIPT_PATH
+    "
+    exit 0
 fi
 echo "==> Running as user: $(whoami)"
 
