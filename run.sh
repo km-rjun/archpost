@@ -20,6 +20,16 @@ if [[ "$CREATE_USER" =~ ^[Yy]$ ]]; then
     fi
 fi
 
+echo "==> Switching to $NEW_USER and continuing..."
+SCRIPT_PATH="$(realpath "$0")"
+sudo -u "$NEW_USER" bash -c "
+cd ~
+$SCRIPT_PATH
+"
+exit 0
+fi
+echo "==> Running as user: $(whoami)"
+
 echo "Select Desktop Environment:"
 echo "1) Hyprland"
 echo "2) Niri"
