@@ -15,6 +15,8 @@ if [[ "$CREATE_USER" =~ ^[Yy]$ ]]; then
         sudo useradd -m -G wheel -s /bin/bash "$NEW_USER"
         echo "Set password for $NEW_USER:"
         sudo passwd "$NEW_USER"
+        echo "==> Enabling sudo for wheel group..."
+        sed -i 's/^# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
     fi
 fi
 
