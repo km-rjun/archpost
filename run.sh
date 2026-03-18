@@ -123,6 +123,9 @@ for folder in "$CLONE_DIR"/*; do
     ln -s "$folder" "$target"
 done
 
+echo "==> Setting zsh as default shell..."
+chsh -s /bin/zsh
+
 echo "==> Configuring greetd..."
 
 if [[ "$DE" == "hyprland" ]]; then
