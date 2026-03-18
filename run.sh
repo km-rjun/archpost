@@ -7,6 +7,10 @@ CLONE_DIR="$HOME/.dotfiles_temp"
 if [[ $EUID -eq 0 ]]; then
     echo "==> Running as root"
 
+    if ! command -v sudo &>/dev/null; then
+        echo "==> Installing sudo..."
+        pacman -Sy --noconfirm sudo
+    fi
     read -rp "Enter username to create/use: " NEW_USER
 
     if id "$NEW_USER" &>/dev/null; then
