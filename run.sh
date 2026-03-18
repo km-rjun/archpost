@@ -4,6 +4,20 @@ set -e
 CONFIG_DIR="$HOME/.config"
 CLONE_DIR="$HOME/.dotfiles_temp"
 
+read -rp "Do you want to create a new user? (y/N): " CREATE_USER
+
+if [[ "$CREATE_USER" =~ ^[Yy]$ ]]; then
+    read -rp "Enter username: " NEW_USER
+    if id "$NEW_USER" &>/dev/null; then
+        echo "User already exists. Skipping creation."
+    else
+        echo "==> Creating user: $NEW_USER"
+        sudo useradd -m -G wheel -s /bin/bash "$NEW_USER"
+        echo "Set password for $NEW_USER:"
+        sudo passwd "$NEW_USER"
+    fi
+fi
+
 echo "Select Desktop Environment:"
 echo "1) Hyprland"
 echo "2) Niri"
@@ -87,4 +101,3 @@ for folder in "$CLONE_DIR"/*; do
 done
 
 echo "==> Setup complete!"
-
