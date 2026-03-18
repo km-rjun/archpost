@@ -4,6 +4,29 @@ set -e
 CONFIG_DIR="$HOME/.config"
 CLONE_DIR="$HOME/.dotfiles_temp"
 
+echo "Select Desktop Environment:"
+echo "1) Hyprland"
+echo "2) Niri"
+
+while true; do
+    read -rp "Enter choice (1 or 2): " DE_CHOICE
+    case $DE_CHOICE in
+        1)
+            DE="hyprland"
+            break
+            ;;
+        2)
+            DE="niri"
+            break
+            ;;
+        *)
+            echo "Invalid option. Try again."
+            ;;
+    esac
+done
+
+echo "==> Selected DE: $DE"
+
 echo "==> Updating system..."
 sudo pacman -Syu --noconfirm
 
@@ -18,15 +41,32 @@ if ! command -v yay &>/dev/null; then
     popd
 fi
 
+COMMON_PKGS=(
+    kitty zsh neovim tmux lazygit fzf starship
+    brave-bin wireguard-tools btop pavucontrol
+    ttf-jetbrains-mono-nerd
+    pipewire wireplumber pipewire-pulse
+    ripgrep unzip zip tar
+    wl-clipboard xdg-utils grim slurp mako greetd
+)
+
+HYPR_PKGS=(
+    hyprland hyprpaper waybar wofi wlogout
+    xdg-desktop-portal-hyprland
+)
+
+NIRI_PKGS=(
+    niri
+    noctalia-shell
+)
+
 echo "==> Installing packages..."
-yay -S --needed --noconfirm \
-    hyprland hyprpaper waybar wofi wlogout mako greetd grim slurp \
-    xdg-desktop-portal-hyprland wl-clipboard xdg-utils \
-    kitty zsh neovim tmux lazygit fzf starship \
-    brave-bin wireguard-tools btop pavucontrol \
-    ttf-jetbrains-mono-nerd \
-    pipewire wireplumber pipewire-pulse ripgrep unzip zip tar \
-    asusctl
+
+if [[ "$DE" == "hyprland" ]]; then
+    yay -S --needed --noconfirm "${COMMON_PKGS[@]}" "${HYPR_PKGS[@]}"
+else
+    yay -S --needed --noconfirm "${COMMON_PKGS[@]}" "${NIRI_PKGS[@]}"
+fi
 
 echo "==> Cloning dotfiles..."
 git clone https://github.com/km-rjun/dotfiles "$CLONE_DIR"
@@ -46,4 +86,5 @@ for folder in "$CLONE_DIR"/*; do
     ln -s "$folder" "$target"
 done
 
-sudo systemctl enable greetd
+echo "==> Setup complete!"
+
