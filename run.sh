@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 set -e
 
+echo "==> Checking internet..."
+if ! ping -c 1 archlinux.org &>/dev/null; then
+    echo "No internet connection. Exiting."
+    exit 1
+fi
+
 CONFIG_DIR="$HOME/.config"
 CLONE_DIR="$HOME/.dotfiles_temp"
 
