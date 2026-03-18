@@ -76,12 +76,13 @@ COMMON_PKGS=(
     brave-bin wireguard-tools btop pavucontrol
     ttf-jetbrains-mono-nerd
     pipewire wireplumber pipewire-pulse
-    ripgrep unzip zip tar
+    ripgrep unzip zip tar wlogout
     wl-clipboard xdg-utils grim slurp mako greetd
+    networkmanager bluez bluez-utils
 )
 
 HYPR_PKGS=(
-    hyprland hyprpaper waybar wofi wlogout
+    hyprland hyprpaper waybar wofi
     xdg-desktop-portal-hyprland
 )
 
