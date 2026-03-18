@@ -47,16 +47,3 @@ for folder in "$CLONE_DIR"/*; do
 done
 
 sudo systemctl enable greetd
-# echo "==> Configuring greetd to autostart Hyprland"
-# sudo mkdir -p /etc/greetd
-# sudo tee /etc/greetd/config.toml >/dev/null <<EOF
-# [terminal]
-# vt = 1
-#
-# [default_session]
-# command = "Hyprland"
-# user = "$USER"
-# EOF
-#
-#
-# echo "✅ Done! Reboot to launch Hyprland with greetd."
