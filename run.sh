@@ -141,5 +141,10 @@ sudo tee /etc/greetd/config.toml > /dev/null <<EOF
 command = "$SESSION_CMD"
 user = "$(whoami)"
 EOF
+echo "==> Enabling essential services..."
+
+sudo systemctl enable greetd
+sudo systemctl enable NetworkManager
+sudo systemctl enable bluetooth || true
 
 echo "==> Setup complete!"
